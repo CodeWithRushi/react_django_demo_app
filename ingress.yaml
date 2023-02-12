@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-demo
+  namespace: react-django-ns
+spec:
+  ingressClassName: django
+  rules:
+    - host: django-todo-example-batch-2.info
+      http:
+        paths:
+          - path: /v1
+            pathType: Prefix
+            backend:
+              service:
+                name: django-svc
+                port:
+                  number: 8002
+
