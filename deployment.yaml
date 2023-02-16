@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deployment
+  namespace: react-django-ns
+  labels:
+    app: django
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django-ctr
+          image: rushis750/django:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: MYENV
+              valueFrom:
+                configMapKeyRef:
+                  name: config12
+                  key: first_name
+

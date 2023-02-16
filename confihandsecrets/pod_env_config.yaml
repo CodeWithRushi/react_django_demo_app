@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod-env
+spec:
+  containers: 
+    - name: container0
+      image: nginx:1.14.2
+      ports:
+        - containerPort: 80
+      env:
+        - name: config-env
+          valueFrom:
+            configMapKeyRef:
+              name: game-demo
+              key: player_initial_lives
